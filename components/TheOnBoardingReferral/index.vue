@@ -42,7 +42,7 @@
         <img :src="SendIcon" alt="" />
         Send 0 email
       </button>
-      <button class="button button--secondary">
+      <button class="button button--secondary" @click="finishReferral">
         Done
       </button>
     </footer>
@@ -64,6 +64,11 @@ export default {
       SendIcon,
       CopyIcon,
       ProfilePicture
+    }
+  },
+  methods: {
+    finishReferral() {
+      console.info('Done')
     }
   }
 }
