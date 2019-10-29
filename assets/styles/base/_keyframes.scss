@@ -8,6 +8,6 @@
 
 .fade-bottom-enter,
 .fade-bottom-leave-to {
-  transform: translateY(10px);
+  transform: translate(-50%, 10px);
   opacity: 0;
 }

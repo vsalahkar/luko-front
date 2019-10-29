@@ -205,7 +205,7 @@ export default {
   .referralCode {
     &__confirmationToast {
       left: 50%;
-      transform: translateY(0) translateX(-50%);
+      transform: translate(-50%, 0);
       bottom: 100%;
       margin-bottom: 4px;
     }
