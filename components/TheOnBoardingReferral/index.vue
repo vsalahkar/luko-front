@@ -32,6 +32,7 @@ export default {
 <style lang="scss">
 .theOnBoardingReferral {
   margin: auto;
+  padding-top: 48px;
   width: 100%;
   max-width: 728px;
 }
