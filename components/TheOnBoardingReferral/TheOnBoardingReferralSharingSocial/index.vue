@@ -136,6 +136,7 @@ export default {
       align-items: center;
       flex: 1;
       color: $primary-color;
+      user-select: all;
     }
 
     button {
