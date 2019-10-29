@@ -9,8 +9,8 @@
         />
       </h1>
       <p>
-        Don’t forget that for each new subscriber you refer, both you and them
-        get <strong>one free month</strong> of coverage! 💙
+        Don’t forget that for each new subscriber you refer, both you and them get <strong>one free month</strong> of
+        coverage! 💙
       </p>
     </header>
     <section class="theOnBoardingReferral__sharingSocial">
@@ -18,22 +18,19 @@
       <div class="theOnBoardingReferral__shareActions">
         <div class="theOnBoardingReferral__referralCode">
           <span>{{ user.referralCode }}</span>
-          <button
-            class="button button--primary button--hasIcon"
-            @click="copyToClipboard(user.referralCode)"
-          >
+          <button class="button button--primary button--hasIcon" @click="copyToClipboard(user.referralCode)">
             <img :src="CopyIcon" alt="copy paste icon" />
             Copy code
+            <transition name="fade-bottom">
+              <base-toast
+                v-if="isCopiedToClipboard"
+                class="referralCode__confirmationToast"
+                description="📋 Referral code copied!"
+              />
+            </transition>
           </button>
-          <transition name="fade-bottom">
-            <base-toast
-              v-if="isCopiedToClipboard"
-              class="referralCode__confirmationToast"
-              description="📋 Referral code copied!"
-            />
-          </transition>
         </div>
-        <button class="button button--primary button--hasIcon">
+        <button class="button button--primary button--hasIcon" @click="shareWithTwitter">
           <img :src="TwitterIcon" alt="copy paste icon" />
           Tweet
         </button>
@@ -44,10 +41,7 @@
       </div>
     </section>
     <section class="theOnBoardingReferral__sharingEmail ">
-      <p>
-        You can also send <strong>one free month</strong> via email, separate
-        emails with semicolon «;»
-      </p>
+      <p>You can also send <strong>one free month</strong> via email, separate emails with semicolon «;»</p>
       <textarea placeholder="amelie.dupont@gmail.com ; jeanmichel@gmail.com" />
     </section>
     <footer class="theOnBoardingReferral__actions">
@@ -115,6 +109,29 @@ export default {
       setTimeout(() => {
         this.isCopiedToClipboard = false
       }, 2000)
+    },
+    shareWithTwitter() {
+      const initialWindowWith = window.outerWidth
+      const targetWindowWidth = 550
+      const targetWindowXPosition = initialWindowWith / 2 - targetWindowWidth / 2
+
+      const targetWindowHeight = 550
+      const targetWindowPositionFromTop = 100
+
+      const strWindowFeatures = `
+      width= ${targetWindowWidth},
+      height= ${targetWindowHeight},
+      left=${targetWindowXPosition},
+      top=${targetWindowPositionFromTop}
+      `
+      window.open(this.tweetUrlWithContent, 'New tweet', strWindowFeatures)
+    }
+  },
+  computed: {
+    tweetUrlWithContent() {
+      const tweetText =
+        "Je vous partage mon code promo qui permet de bénéficier d'un mois gratuit chez la néo-assurance Luko :"
+      return `https://twitter.com/intent/tweet?text=${tweetText} ${this.user.referralCode}`
     }
   }
 }
@@ -162,7 +179,6 @@ export default {
   }
 
   &__referralCode {
-    position: relative;
     flex: 1;
     display: flex;
     align-items: stretch;
@@ -179,6 +195,7 @@ export default {
     }
 
     button {
+      position: relative;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       cursor: copy;
@@ -187,7 +204,8 @@ export default {
 
   .referralCode {
     &__confirmationToast {
-      right: 0;
+      left: 50%;
+      transform: translateY(0) translateX(-50%);
       bottom: 100%;
       margin-bottom: 4px;
     }
@@ -196,12 +214,6 @@ export default {
   &__sharingEmail {
     textarea {
       margin-bottom: 16px;
-      border: 1px solid $base-color-light-1;
-      border-radius: 4px;
-      padding: 12px 24px;
-      width: 100%;
-      max-width: 100%;
-      min-width: 100%;
       min-height: 128px;
     }
   }
