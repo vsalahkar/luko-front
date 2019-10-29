@@ -6,15 +6,15 @@
 
 <script>
 export default {
-  data() {
-    return {
-      userProfilePictureUrl: this.loadUserProfilePicture(this.userFirstName)
-    }
-  },
   props: {
     userFirstName: {
       type: String,
       default: ''
+    }
+  },
+  data() {
+    return {
+      userProfilePictureUrl: this.loadUserProfilePicture(this.userFirstName)
     }
   },
   methods: {

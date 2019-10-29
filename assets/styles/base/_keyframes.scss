@@ -1,0 +1,13 @@
+.fade-bottom-enter-active {
+  transition: all 0.3s ease;
+}
+
+.fade-bottom-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.fade-bottom-enter,
+.fade-bottom-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}

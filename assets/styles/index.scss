@@ -1,4 +1,12 @@
+// Base
+@import './base/index';
+@import './base/keyframes';
+
+// Layout
 @import './layout';
-@import './variables';
-@import './base';
+
+// Variables
+@import './variables/colors';
+
+// Object
 @import './objects/button';

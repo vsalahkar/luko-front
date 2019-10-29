@@ -25,6 +25,13 @@
             <img :src="CopyIcon" alt="copy paste icon" />
             Copy code
           </button>
+          <transition name="fade-bottom">
+            <base-toast
+              v-if="isCopiedToClipboard"
+              class="referralCode__confirmationToast"
+              description="📋 Referral code copied!"
+            />
+          </transition>
         </div>
         <button class="button button--primary button--hasIcon">
           <img :src="TwitterIcon" alt="copy paste icon" />
@@ -63,24 +70,27 @@ import FacebookIcon from '../../static/icons/facebook-icon.png'
 import SendIcon from '../../static/icons/send-icon.svg'
 import CopyIcon from '../../static/icons/copy-icon.svg'
 import ProfilePicture from '../../static/images/emma-photo.png'
+import BaseToast from '../utils/BaseToast'
 
 export default {
-  data: () => {
-    return {
-      TwitterIcon,
-      FacebookIcon,
-      SendIcon,
-      CopyIcon,
-      ProfilePicture
-    }
-  },
   components: {
+    BaseToast,
     BaseUserProfilePicture
   },
   props: {
     user: {
       default: () => {},
       type: Object
+    }
+  },
+  data: () => {
+    return {
+      isCopiedToClipboard: false,
+      TwitterIcon,
+      FacebookIcon,
+      SendIcon,
+      CopyIcon,
+      ProfilePicture
     }
   },
   methods: {
@@ -90,9 +100,21 @@ export default {
     async copyToClipboard(stringToCopy) {
       try {
         await navigator.clipboard.writeText(stringToCopy)
+        this.toggleCopyToClipboardToast()
       } catch (err) {
         console.error('Failed to copy: ', err)
       }
+    },
+    toggleCopyToClipboardToast() {
+      if (this.isCopiedToClipboard) {
+        return
+      }
+
+      this.isCopiedToClipboard = true
+
+      setTimeout(() => {
+        this.isCopiedToClipboard = false
+      }, 2000)
     }
   }
 }
@@ -140,6 +162,7 @@ export default {
   }
 
   &__referralCode {
+    position: relative;
     flex: 1;
     display: flex;
     align-items: stretch;
@@ -159,6 +182,14 @@ export default {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       cursor: copy;
+    }
+  }
+
+  .referralCode {
+    &__confirmationToast {
+      right: 0;
+      bottom: 100%;
+      margin-bottom: 4px;
     }
   }
 
