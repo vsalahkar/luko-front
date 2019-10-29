@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Rectangle</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Success-Onboarding/17.-Referral" transform="translate(-412.000000, -595.000000)" fill="#FFFFFF">
+            <g id="CHAT" transform="translate(324.000000, 189.000000)">
+                <g id="REFFERAL">
+                    <g id="EMAIL" transform="translate(64.000000, 212.000000)">
+                        <g id="TWITTER-Copy-2" transform="translate(0.000000, 178.000000)">
+                            <path d="M25.4474212,16.1041306 L39.4423908,23.1056766 C39.9363119,23.3527806 40.1363968,23.9535001 39.8892929,24.4474212 C39.7925554,24.6407841 39.6357537,24.7975858 39.4423908,24.8943234 L25.4474212,31.8958694 C24.9535001,32.1429733 24.3527806,31.9428884 24.1056766,31.4489672 C24.0361816,31.3100578 24,31.1568695 24,31.001546 L24,25.9311192 C24,25.4064805 24.4054475,24.9710395 24.928753,24.9336605 L38,24 L24.928753,23.0663395 C24.4054475,23.0289605 24,22.5935195 24,22.0688808 L24,16.998454 C24,16.4461692 24.4477153,15.998454 25,15.998454 C25.1553235,15.998454 25.3085118,16.0346356 25.4474212,16.1041306 Z" id="Rectangle"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

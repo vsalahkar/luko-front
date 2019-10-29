@@ -14,7 +14,10 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}]
+    link: [
+      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans:400,700&display=swap' }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -24,7 +27,8 @@ export default {
    ** Global CSS
    */
   css: [
-    { src: '~assets/styles/css/normalize.css' },
+    {src: '~assets/styles/index.scss'},
+    {src: '~assets/styles/css/normalize.css'}
   ],
   /*
    ** Plugins to load before mounting the App
@@ -40,13 +44,9 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    ['@nuxtjs/style-resources'],
-  ],
+  modules: [['@nuxtjs/style-resources']],
   styleResources: {
-    scss: [
-      'assets/styles/index.scss',
-    ]
+    scss: ['assets/styles/index.scss']
   },
   /*
    ** Build configuration

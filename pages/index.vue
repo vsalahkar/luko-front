@@ -1,17 +1,22 @@
 <template>
-  <div>
-    Hello World
-  </div>
+  <main>
+    <the-header />
+    <section class="container">
+      <the-on-boarding-referral />
+    </section>
+  </main>
 </template>
 
 <script>
+import TheHeader from '../components/TheHeader'
+import TheOnBoardingReferral from '../components/TheOnBoardingReferral'
+
 export default {
-  components: {}
+  components: {
+    TheHeader,
+    TheOnBoardingReferral
+  }
 }
 </script>
 
-<style lang="scss">
-div {
-  color: $primary-color;
-}
-</style>
+<style lang="scss"></style>
