@@ -18,7 +18,10 @@
       <div class="theOnBoardingReferral__shareActions">
         <div class="theOnBoardingReferral__referralCode">
           <span>{{ user.referralCode }}</span>
-          <button class="button button--primary button--hasIcon">
+          <button
+            class="button button--primary button--hasIcon"
+            @click="copyToClipboard(user.referralCode)"
+          >
             <img :src="CopyIcon" alt="copy paste icon" />
             Copy code
           </button>
@@ -83,6 +86,13 @@ export default {
   methods: {
     finishReferral() {
       console.info('Done')
+    },
+    async copyToClipboard(stringToCopy) {
+      try {
+        await navigator.clipboard.writeText(stringToCopy)
+      } catch (err) {
+        console.error('Failed to copy: ', err)
+      }
     }
   }
 }
