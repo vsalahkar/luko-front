@@ -1,0 +1,28 @@
+@import '../variables';
+
+.button {
+  padding: 12px 24px;
+  border-radius: 4px;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+
+  &--primary {
+    background-color: $primary-color;
+    color: $base-color-light;
+
+    &:hover {
+      background-color: darken($primary-color, 5)
+    }
+  }
+
+  &--secondary {
+    background-color: $secondary-color;
+    color: $primary-color;
+
+    &:hover {
+      background-color: darken($secondary-color, 5)
+    }
+  }
+}
