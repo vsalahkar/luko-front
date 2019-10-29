@@ -24,5 +24,6 @@ export default {
   background-color: lighten($base-color-dark, 15);
   color: $base-color-light;
   font-size: 14px;
+  text-transform: none;
 }
 </style>

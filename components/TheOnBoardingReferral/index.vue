@@ -13,33 +13,7 @@
         coverage! 💙
       </p>
     </header>
-    <section class="theOnBoardingReferral__sharingSocial">
-      <p>Share your <strong>one free month</strong> referral code</p>
-      <div class="theOnBoardingReferral__shareActions">
-        <div class="theOnBoardingReferral__referralCode">
-          <span>{{ user.referralCode }}</span>
-          <button class="button button--primary button--hasIcon" @click="copyToClipboard(user.referralCode)">
-            <img :src="CopyIcon" alt="copy paste icon" />
-            Copy code
-            <transition name="fade-bottom">
-              <base-toast
-                v-if="isCopiedToClipboard"
-                class="referralCode__confirmationToast"
-                description="📋 Referral code copied!"
-              />
-            </transition>
-          </button>
-        </div>
-        <button class="button button--primary button--hasIcon" @click="shareWithTwitter">
-          <img :src="TwitterIcon" alt="copy paste icon" />
-          Tweet
-        </button>
-        <button class="button button--primary button--hasIcon">
-          <img :src="FacebookIcon" alt="copy paste icon" />
-          Share
-        </button>
-      </div>
-    </section>
+    <the-on-boarding-referral-social-sharing :referral-code="user.referralCode" />
     <section class="theOnBoardingReferral__sharingEmail ">
       <p>You can also send <strong>one free month</strong> via email, separate emails with semicolon « ; »</p>
       <textarea v-model="referralEmails" placeholder="amelie.dupont@gmail.com ; jeanmichel@gmail.com" />
@@ -59,17 +33,15 @@
 <script>
 import BaseUserProfilePicture from '../utils/BaseUserProfilePicture'
 
-import TwitterIcon from '../../static/icons/twitter-icon.svg'
-import FacebookIcon from '../../static/icons/facebook-icon.png'
 import SendIcon from '../../static/icons/send-icon.svg'
-import CopyIcon from '../../static/icons/copy-icon.svg'
 import ProfilePicture from '../../static/images/emma-photo.png'
-import BaseToast from '../utils/BaseToast'
+
+import TheOnBoardingReferralSocialSharing from './TheOnBoardingReferralSocialSharing'
 
 export default {
   components: {
-    BaseToast,
-    BaseUserProfilePicture
+    BaseUserProfilePicture,
+    TheOnBoardingReferralSocialSharing
   },
   props: {
     user: {
@@ -79,22 +51,12 @@ export default {
   },
   data: () => {
     return {
-      isCopiedToClipboard: false,
       referralEmails: null,
-      TwitterIcon,
-      FacebookIcon,
       SendIcon,
-      CopyIcon,
       ProfilePicture
     }
   },
   computed: {
-    tweetUrlWithContent() {
-      const tweetText =
-        "Je vous partage mon code promo qui permet de bénéficier d'un mois gratuit chez la néo-assurance Luko :"
-
-      return `https://twitter.com/intent/tweet?text=${tweetText} ${this.user.referralCode}`
-    },
     emailsArray() {
       if (!this.referralEmails) {
         return []
@@ -114,41 +76,6 @@ export default {
   methods: {
     finishReferral() {
       console.info('Done')
-    },
-    async copyToClipboard(stringToCopy) {
-      try {
-        await navigator.clipboard.writeText(stringToCopy)
-        this.toggleCopyToClipboardToast()
-      } catch (err) {
-        console.error('Failed to copy: ', err)
-      }
-    },
-    toggleCopyToClipboardToast() {
-      if (this.isCopiedToClipboard) {
-        return
-      }
-
-      this.isCopiedToClipboard = true
-
-      setTimeout(() => {
-        this.isCopiedToClipboard = false
-      }, 2000)
-    },
-    shareWithTwitter() {
-      const initialWindowWith = window.outerWidth
-      const targetWindowWidth = 550
-      const targetWindowXPosition = initialWindowWith / 2 - targetWindowWidth / 2
-
-      const targetWindowHeight = 550
-      const targetWindowPositionFromTop = 100
-
-      const strWindowFeatures = `
-      width= ${targetWindowWidth},
-      height= ${targetWindowHeight},
-      left=${targetWindowXPosition},
-      top=${targetWindowPositionFromTop}
-      `
-      window.open(this.tweetUrlWithContent, 'New tweet', strWindowFeatures)
     }
   }
 }
@@ -175,56 +102,11 @@ export default {
     left: calc(-48px - 16px);
   }
 
-  &__sharingSocial,
   &__sharingEmail {
     margin-top: 24px;
 
     p {
       margin-bottom: 16px;
-    }
-  }
-
-  &__shareActions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-
-    & > button {
-      margin-left: 8px;
-    }
-  }
-
-  &__referralCode {
-    flex: 1;
-    display: flex;
-    align-items: stretch;
-
-    span {
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
-      padding: 12px 24px;
-      background-color: $secondary-color;
-      display: flex;
-      align-items: center;
-      flex: 1;
-      color: $primary-color;
-    }
-
-    button {
-      position: relative;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      cursor: copy;
-    }
-  }
-
-  .referralCode {
-    &__confirmationToast {
-      left: 50%;
-      transform: translate(-50%, 0);
-      bottom: 100%;
-      margin-bottom: 4px;
     }
   }
 
