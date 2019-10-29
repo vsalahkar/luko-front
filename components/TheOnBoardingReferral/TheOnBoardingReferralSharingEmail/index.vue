@@ -4,7 +4,7 @@
     <textarea v-model="referralEmails" placeholder="amelie.dupont@gmail.com ; jeanmichel@gmail.com" />
     <div class="theOnBoardingReferralSharingEmail__actions">
       <button class="button button--primary button--hasIcon" :disabled="numberOfReferralEmails === 0">
-        <img :src="SendIcon" alt="" />
+        <img :src="SendIcon" alt="Send icon" />
         Send {{ numberOfReferralEmails }} email{{ numberOfReferralEmails > 1 ? 's' : '' }}
       </button>
       <button class="button button--secondary" @click="finishReferral">

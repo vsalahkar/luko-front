@@ -19,11 +19,11 @@
         </button>
       </div>
       <button class="button button--primary button--hasIcon" @click="shareWithTwitter">
-        <img :src="TwitterIcon" alt="copy paste icon" />
+        <img :src="TwitterIcon" alt="tweet icon" />
         Tweet
       </button>
       <button class="button button--primary button--hasIcon">
-        <img :src="FacebookIcon" alt="copy paste icon" />
+        <img :src="FacebookIcon" alt="facebook icon" />
         Share
       </button>
     </div>
