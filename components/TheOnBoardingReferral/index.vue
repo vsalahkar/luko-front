@@ -2,8 +2,11 @@
   <article class="theOnBoardingReferral">
     <header class="theOnBoardingReferral__header">
       <h1>
-        Emma
-        <img :src="ProfilePicture" alt="" />
+        {{ user.firstName }}
+        <base-user-profile-picture
+          class="theOnBoardingReferral__profilePicture"
+          :user-first-name="user.profilePicture"
+        />
       </h1>
       <p>
         Don’t forget that for each new subscriber you refer, both you and them
@@ -14,7 +17,7 @@
       <p>Share your <strong>one free month</strong> referral code</p>
       <div class="theOnBoardingReferral__shareActions">
         <div class="theOnBoardingReferral__referralCode">
-          <span>SHARETHELOVE+5WMXM</span>
+          <span>{{ user.referralCode }}</span>
           <button class="button button--primary button--hasIcon">
             <img :src="CopyIcon" alt="copy paste icon" />
             Copy code
@@ -50,6 +53,8 @@
 </template>
 
 <script>
+import BaseUserProfilePicture from '../utils/BaseUserProfilePicture'
+
 import TwitterIcon from '../../static/icons/twitter-icon.svg'
 import FacebookIcon from '../../static/icons/facebook-icon.png'
 import SendIcon from '../../static/icons/send-icon.svg'
@@ -64,6 +69,15 @@ export default {
       SendIcon,
       CopyIcon,
       ProfilePicture
+    }
+  },
+  components: {
+    BaseUserProfilePicture
+  },
+  props: {
+    user: {
+      default: () => {},
+      type: Object
     }
   },
   methods: {
@@ -87,15 +101,12 @@ export default {
       font-weight: 900;
       font-size: 16px;
     }
+  }
 
-    img {
-      position: absolute;
-      top: 0;
-      left: calc(-48px - 16px);
-      width: 48px;
-      height: 48px;
-      border-radius: 100%;
-    }
+  &__profilePicture {
+    position: absolute;
+    top: 0;
+    left: calc(-48px - 16px);
   }
 
   &__sharingSocial,
