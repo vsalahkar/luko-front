@@ -41,13 +41,13 @@
       </div>
     </section>
     <section class="theOnBoardingReferral__sharingEmail ">
-      <p>You can also send <strong>one free month</strong> via email, separate emails with semicolon «;»</p>
-      <textarea placeholder="amelie.dupont@gmail.com ; jeanmichel@gmail.com" />
+      <p>You can also send <strong>one free month</strong> via email, separate emails with semicolon « ; »</p>
+      <textarea v-model="referralEmails" placeholder="amelie.dupont@gmail.com ; jeanmichel@gmail.com" />
     </section>
     <footer class="theOnBoardingReferral__actions">
-      <button class="button button--primary button--hasIcon" disabled>
+      <button class="button button--primary button--hasIcon" :disabled="numberOfReferralEmails === 0">
         <img :src="SendIcon" alt="" />
-        Send 0 email
+        Send {{ numberOfReferralEmails }} email{{ numberOfReferralEmails > 1 ? 's' : '' }}
       </button>
       <button class="button button--secondary" @click="finishReferral">
         Done
@@ -80,11 +80,35 @@ export default {
   data: () => {
     return {
       isCopiedToClipboard: false,
+      referralEmails: null,
       TwitterIcon,
       FacebookIcon,
       SendIcon,
       CopyIcon,
       ProfilePicture
+    }
+  },
+  computed: {
+    tweetUrlWithContent() {
+      const tweetText =
+        "Je vous partage mon code promo qui permet de bénéficier d'un mois gratuit chez la néo-assurance Luko :"
+
+      return `https://twitter.com/intent/tweet?text=${tweetText} ${this.user.referralCode}`
+    },
+    emailsArray() {
+      if (!this.referralEmails) {
+        return []
+      }
+
+      const emailRegexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+      return this.referralEmails
+        .split(';')
+        .map((email) => email.trim())
+        .filter((email) => emailRegexp.test(email))
+    },
+    numberOfReferralEmails() {
+      return this.emailsArray.length
     }
   },
   methods: {
@@ -125,13 +149,6 @@ export default {
       top=${targetWindowPositionFromTop}
       `
       window.open(this.tweetUrlWithContent, 'New tweet', strWindowFeatures)
-    }
-  },
-  computed: {
-    tweetUrlWithContent() {
-      const tweetText =
-        "Je vous partage mon code promo qui permet de bénéficier d'un mois gratuit chez la néo-assurance Luko :"
-      return `https://twitter.com/intent/tweet?text=${tweetText} ${this.user.referralCode}`
     }
   }
 }
