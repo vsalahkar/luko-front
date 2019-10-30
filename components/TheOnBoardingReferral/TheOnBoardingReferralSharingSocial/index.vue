@@ -8,7 +8,7 @@
         <span>{{ referralCode }}</span>
         <button class="button button--primary button--hasIcon" @click="copyToClipboard(referralCode)">
           <img :src="CopyIcon" alt="copy paste icon" />
-          Copy code
+          <span>Copy code</span>
           <transition name="fade-bottom">
             <base-toast
               v-click-outside.stop="closeCopyToClipboardToast"
@@ -19,14 +19,16 @@
           </transition>
         </button>
       </div>
-      <button class="button button--primary button--hasIcon" @click="shareWithTwitter">
-        <img :src="TwitterIcon" alt="tweet icon" />
-        Tweet
-      </button>
-      <button class="button button--primary button--hasIcon">
-        <img :src="FacebookIcon" alt="facebook icon" />
-        Share
-      </button>
+      <div class="theOnBoardingReferralSocialSharing__socialNetwork">
+        <button class="button button--primary button--hasIcon" @click="shareWithTwitter">
+          <img :src="TwitterIcon" alt="tweet icon" />
+          <span>Tweet</span>
+        </button>
+        <button class="button button--primary button--hasIcon">
+          <img :src="FacebookIcon" alt="facebook icon" />
+          <span>Share</span>
+        </button>
+      </div>
     </div>
   </section>
 </template>
@@ -127,12 +129,20 @@ export default {
 
   &__actions {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     flex-wrap: wrap;
 
-    & > button {
-      margin-left: 8px;
+    @media (max-width: 728px) {
+      button {
+        & > span {
+          display: none;
+        }
+
+        & > img {
+          margin: 0;
+        }
+      }
     }
   }
 
@@ -141,7 +151,7 @@ export default {
     display: flex;
     align-items: stretch;
 
-    span {
+    & > span {
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
       padding: 12px 24px;
@@ -167,6 +177,37 @@ export default {
       transform: translate(-50%, 0);
       bottom: 100%;
       margin-bottom: 4px;
+    }
+  }
+
+  &__socialNetwork {
+    display: flex;
+    align-items: stretch;
+
+    & > button {
+      margin-left: 8px;
+    }
+
+    @media (max-width: 480px) {
+      margin-top: 16px;
+      width: 100%;
+
+      button {
+        margin: 0;
+        flex: 1;
+
+        &:first-of-type {
+          margin-right: 8px;
+        }
+
+        & > span {
+          display: inherit;
+        }
+
+        & > img {
+          margin-right: 16px;
+        }
+      }
     }
   }
 }

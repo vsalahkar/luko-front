@@ -9,7 +9,7 @@
         :disabled="numberOfReferralEmails === 0"
       >
         <img :src="SendIcon" alt="Send icon" />
-        Send {{ numberOfReferralEmails }} email{{ numberOfReferralEmails > 1 ? 's' : '' }}
+        <span>Send {{ numberOfReferralEmails }} email{{ numberOfReferralEmails > 1 ? 's' : '' }}</span>
       </button>
       <button class="button button--secondary" @click="finishReferral">
         Done
