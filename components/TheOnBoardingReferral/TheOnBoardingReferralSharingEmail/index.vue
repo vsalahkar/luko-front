@@ -3,7 +3,11 @@
     <p>You can also send <strong>one free month</strong> via email, separate emails with semicolon « ; »</p>
     <textarea v-model="referralEmails" placeholder="amelie.dupont@gmail.com ; jeanmichel@gmail.com" />
     <div class="theOnBoardingReferralSharingEmail__actions">
-      <button class="button button--primary button--hasIcon" :disabled="numberOfReferralEmails === 0">
+      <button
+        class="button button--primary button--hasIcon"
+        @click="sendEmailReferral"
+        :disabled="numberOfReferralEmails === 0"
+      >
         <img :src="SendIcon" alt="Send icon" />
         Send {{ numberOfReferralEmails }} email{{ numberOfReferralEmails > 1 ? 's' : '' }}
       </button>
@@ -44,6 +48,9 @@ export default {
   methods: {
     finishReferral() {
       console.info('Done')
+    },
+    sendEmailReferral() {
+      console.info(`Referral has been sent to: ${JSON.stringify(this.emailsArray, 0, 2)}`)
     }
   }
 }
