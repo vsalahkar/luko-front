@@ -167,7 +167,10 @@ export default {
       position: relative;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      cursor: copy;
+
+      &:hover {
+        cursor: copy;
+      }
     }
   }
 
