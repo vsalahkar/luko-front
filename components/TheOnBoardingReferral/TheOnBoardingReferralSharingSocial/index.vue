@@ -11,6 +11,7 @@
           Copy code
           <transition name="fade-bottom">
             <base-toast
+              v-click-outside.stop="closeCopyToClipboardToast"
               v-if="isCopiedToClipboard"
               class="referralCode__confirmationToast"
               description="📋 Referral code copied!"
@@ -31,6 +32,8 @@
 </template>
 
 <script>
+import vClickOutside from 'v-click-outside'
+
 import BaseToast from '../../utils/BaseToast'
 
 import TwitterIcon from '../../../static/icons/twitter-icon.svg'
@@ -55,12 +58,30 @@ export default {
       CopyIcon
     }
   },
+  directives: {
+    clickOutside: vClickOutside.directive
+  },
   computed: {
     tweetUrlWithContent() {
       const tweetText =
         "Je vous partage mon code promo qui permet de bénéficier d'un mois gratuit chez la néo-assurance Luko :"
 
       return `https://twitter.com/intent/tweet?text=${tweetText} ${this.referralCode}`
+    },
+    windowFeatureParameters() {
+      const initialWindowWidth = window.outerWidth
+      const targetWindowWidth = 550
+      const targetWindowXPosition = initialWindowWidth / 2 - targetWindowWidth / 2
+
+      const targetWindowHeight = 550
+      const targetWindowPositionFromTop = 100
+
+      return `
+      width= ${targetWindowWidth},
+      height= ${targetWindowHeight},
+      left=${targetWindowXPosition},
+      top=${targetWindowPositionFromTop}
+      `
     }
   },
   methods: {
@@ -84,20 +105,13 @@ export default {
       }, 2000)
     },
     shareWithTwitter() {
-      const initialWindowWith = window.outerWidth
-      const targetWindowWidth = 550
-      const targetWindowXPosition = initialWindowWith / 2 - targetWindowWidth / 2
-
-      const targetWindowHeight = 550
-      const targetWindowPositionFromTop = 100
-
-      const strWindowFeatures = `
-      width= ${targetWindowWidth},
-      height= ${targetWindowHeight},
-      left=${targetWindowXPosition},
-      top=${targetWindowPositionFromTop}
-      `
-      window.open(this.tweetUrlWithContent, 'New tweet', strWindowFeatures)
+      window.open(this.tweetUrlWithContent, 'New tweet', this.windowFeatureParameters)
+    },
+    closeCopyToClipboardToast() {
+      if (!this.isCopiedToClipboard) {
+        return
+      }
+      this.isCopiedToClipboard = false
     }
   }
 }
