@@ -63,10 +63,10 @@ export default {
   },
   computed: {
     tweetUrlWithContent() {
-      const tweetText =
-        "Je vous partage mon code promo qui permet de bénéficier d'un mois gratuit chez la néo-assurance Luko :"
+      const twitterUrl = 'https://twitter.com/intent/tweet?text='
+      const tweetText = `Je vous partage mon code promo qui permet de bénéficier d'un mois gratuit chez la néo-assurance Luko : ${this.referralCode}`
 
-      return `https://twitter.com/intent/tweet?text=${tweetText} ${this.referralCode}`
+      return `${twitterUrl}${tweetText}`
     },
     windowFeatureParameters() {
       const initialWindowWidth = window.outerWidth
